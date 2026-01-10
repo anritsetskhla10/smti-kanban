@@ -29,8 +29,7 @@ Ensure you have **Node.js 18.17** or later installed.
 
 1.  **Clone the repository:**
     ```bash
-    # Replace the URL below with your actual repository link
-    git clone [https://github.com/anritsetskhla10/smti-kanban.git](https://github.com/anritsetskhla10/smti-kanban.git)
+    git clone https://github.com/anritsetskhla10/smti-kanban.git
     cd smti-kanban
     ```
 
