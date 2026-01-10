@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Inquiry Kanban Board
 
-## Getting Started
+A robust, interactive Kanban board module designed for the SMTI ERP system to manage event inquiries. This application allows staff to track requests through multiple phases using a drag-and-drop interface.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+* **Interactive Kanban Board:** Drag and drop inquiries between columns (New, Sent to Hotels, Offers Received, Completed) using `@hello-pangea/dnd`.
+* **Deep Filtering:** Filter by Client Name, Date Range, and Minimum Value. **Filters are synchronized with the URL**, allowing users to bookmark or share specific views.
+* **Inquiry Management:** Full CRUD capabilities—create new inquiries and edit existing details via a modal.
+* **Optimistic UI:** Phase updates are reflected immediately in the UI while the API syncs in the background, ensuring a snappy user experience.
+* **Mock API:** Simulated 500ms network latency to demonstrate loading states and error handling.
+* **Dark Mode:** Fully responsive design with native dark mode support.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+* **Framework:** Next.js 14 (App Router)
+* **Language:** TypeScript
+* **State Management:** Zustand (chosen for performance and simplicity)
+* **Styling:** Tailwind CSS
+* **Drag & Drop:** @hello-pangea/dnd
+* **Icons:** Lucide React
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📦 Getting Started
 
-## Learn More
+### Prerequisites
+Ensure you have **Node.js 18.17** or later installed.
 
-To learn more about Next.js, take a look at the following resources:
+### Installation Steps
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1.  **Clone the repository:**
+    ```bash
+    # Replace the URL below with your actual repository link
+    git clone [https://github.com/anritsetskhla10/smti-kanban.git](https://github.com/anritsetskhla10/smti-kanban.git)
+    cd smti-kanban
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-## Deploy on Vercel
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4.  **Open the app:**
+    Visit [http://localhost:3000](http://localhost:3000) in your browser.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📂 Project Structure
+
+Here is a quick overview of the top-level directory structure:
+
+* `src/store` - Global state management (Zustand). Contains `useInquiryStore` with persistence logic.
+* `src/components/board` - Core Kanban components (Board, Columns, Cards) and Modals (Create/Edit).
+* `src/components/ui` - Reusable atomic components (Buttons, Inputs, Badges).
+* `src/app/api` - Mock API routes handling GET, POST, and PATCH requests with simulated delay.
+* `src/hooks` - Custom hooks like `useUrlSync` (for URL state) and `useDebounce`.
+* `src/lib` - Utility functions and mock data definitions.
+
+## 📝 Design Decisions
+
+For a detailed explanation of the architectural choices , please refer to [DECISIONS.md](./DECISIONS.md).
