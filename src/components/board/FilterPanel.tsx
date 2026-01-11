@@ -28,7 +28,7 @@ export const FilterPanel = () => {
   ].filter(Boolean).length;
 
   return (
-    <div className="flex flex-col xl:flex-row gap-5 items-start xl:items-center w-full">
+    <div className="flex flex-col xl:flex-row gap-8 items-start xl:items-center w-full">
       
       {/* Search Bar */}
       <div className="relative w-full xl:max-w-md group">
@@ -48,7 +48,7 @@ export const FilterPanel = () => {
       <div className="h-8 w-px bg-gray-200 dark:bg-gray-700 hidden xl:block" />
 
       {/*  Filters Group */}
-      <div className="flex flex-wrap items-center gap-4 w-full xl:w-auto">
+      <div className="flex flex-wrap items-center gap-8 w-full xl:w-auto">
         
         {/* Date Range */}
         <div className="flex items-center bg-transparent border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-2 gap-3 h-[42px]">
@@ -69,6 +69,9 @@ export const FilterPanel = () => {
                 />
              </div>
         </div>
+
+        {/* Separator */}
+              <div className="h-8 w-px bg-gray-200 dark:bg-gray-700 hidden xl:block" />
 
         {/* Min Value */}
         <div className="flex items-center gap-3 bg-transparent border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-2 h-[42px] min-w-[180px]">

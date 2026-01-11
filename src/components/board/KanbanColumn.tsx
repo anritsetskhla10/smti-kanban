@@ -54,10 +54,10 @@ export const KanbanColumn = ({ id, title, inquiries, onCardClick }: KanbanColumn
   }, [inquiries, sortBy]);
 
   return (
-    <div className="flex flex-col h-full min-w-[300px] w-[85vw] md:w-[350px] bg-gray-50/50 dark:bg-gray-800/20 rounded-2xl p-3 border border-gray-200/60 dark:border-gray-700/50">
+    <div className="flex flex-col h-full min-w-[300px] w-[85vw] md:w-[350px] bg-gray-50/50 dark:bg-gray-800/20 rounded-2xl p-3 border border-gray-400/40 dark:border-gray-700/50">
       
       {/* Header */}
-      <div className="relative flex items-center justify-between px-1 py-2 mb-3">
+      <div className="relative flex items-center justify-between px-1 py-2 mb-3 shrink-0">
          <div className="flex items-center gap-2">
             <h2 className="text-sm font-bold text-gray-700 dark:text-gray-200 uppercase tracking-tight">{title}</h2>
             <Badge variant="neutral" className="bg-white dark:bg-gray-700 shadow-sm font-mono">{inquiries.length}</Badge>
@@ -128,7 +128,7 @@ export const KanbanColumn = ({ id, title, inquiries, onCardClick }: KanbanColumn
             {...provided.droppableProps}
             ref={provided.innerRef}
             className={twMerge(
-                "flex-1 flex flex-col gap-3 min-h-[150px] transition-colors rounded-xl",
+                "flex-1 flex flex-col gap-3 min-h-0 overflow-y-auto custom-scrollbar transition-colors rounded-xl pr-2",
                 snapshot.isDraggingOver ? "bg-primary/5 ring-2 ring-primary/20 ring-inset" : ""
             )}
           >

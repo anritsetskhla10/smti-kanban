@@ -70,7 +70,7 @@ export const KanbanBoard = ({ onCardClick }: KanbanBoardProps) => {
 
   return (
     <DndContext onDragEnd={onDragEnd}>
-      <div className="flex h-full gap-4 overflow-x-auto px-layout pb-4 items-start snap-x snap-mandatory md:snap-none scrollbar-thin scrollbar-thumb-bg-input scrollbar-track-transparent">
+      <div className="flex h-full gap-4 overflow-x-auto px-layout pb-4 items-start justify-start 2xl:justify-center snap-x snap-mandatory md:snap-none scrollbar-thin scrollbar-thumb-bg-input scrollbar-track-transparent">
         {COLUMNS.map((col) => {
           const columnInquiries = filteredInquiries.filter(
             (inq) => inq.phase === col.id

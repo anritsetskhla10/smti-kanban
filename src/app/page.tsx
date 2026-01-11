@@ -24,7 +24,7 @@ export default function Home() {
       
       {/* Top Section Container */}
       <div className="px-6 pt-6 pb-2 shrink-0 z-30">
-        <div className="max-w-[1920px] mx-auto">
+        <div className="max-w-screen-2xl mx-auto">
             <Header onNewInquiry={() => setIsCreateModalOpen(true)} />
 
             <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200/60 dark:border-gray-700 p-1 shadow-sm mb-2">
