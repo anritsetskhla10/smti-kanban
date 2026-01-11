@@ -56,14 +56,22 @@ export const FilterPanel = () => {
              <div className="flex items-center gap-2">
                 <input 
                     type="date" 
-                    className="bg-transparent border-none text-xs font-semibold text-gray-700 dark:text-gray-200 focus:ring-0 p-0 w-[95px] outline-none font-mono cursor-pointer placeholder-gray-400"
+                    className={`bg-transparent border-none text-xs font-semibold focus:ring-0 p-0 w-[95px] outline-none font-mono cursor-pointer transition-colors ${
+                        filters.dateRange.from 
+                            ? "text-gray-700 dark:text-gray-200"
+                            : "text-gray-400"                    
+                    }`}
                     value={filters.dateRange.from || ''}
                     onChange={(e) => setFilters({ dateRange: { ...filters.dateRange, from: e.target.value || null } })}
                 />
                 <span className="text-gray-400">→</span>
                 <input 
                     type="date" 
-                    className="bg-transparent border-none text-xs font-semibold text-gray-700 dark:text-gray-200 focus:ring-0 p-0 w-[95px] outline-none font-mono cursor-pointer placeholder-gray-400"
+                    className={`bg-transparent border-none text-xs font-semibold focus:ring-0 p-0 w-[95px] outline-none font-mono cursor-pointer transition-colors ${
+                        filters.dateRange.to 
+                            ? "text-gray-700 dark:text-gray-200" 
+                            : "text-gray-400"
+                    }`}
                     value={filters.dateRange.to || ''}
                     onChange={(e) => setFilters({ dateRange: { ...filters.dateRange, to: e.target.value || null } })}
                 />
