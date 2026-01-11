@@ -27,16 +27,30 @@ export const useInquiryStore = create<InquiryState>()(
         minValue: 0,
       },
 
-      //  GET 
+      //  GET
       fetchInquiries: async () => {
-        if (get().inquiries.length > 0) return;
-
         set({ isLoading: true, error: null });
         try {
-          const res = await fetch('/api/inquiries');
+          const { filters } = get();
+          
+          // URL პარამეტრები
+          const params = new URLSearchParams();
+          if (filters.searchQuery) params.append('search', filters.searchQuery);
+          if (filters.minValue > 0) params.append('min', filters.minValue.toString());
+          if (filters.dateRange.from) params.append('from', filters.dateRange.from);
+          if (filters.dateRange.to) params.append('to', filters.dateRange.to);
+
+          const res = await fetch(`/api/inquiries?${params.toString()}`);
           if (!res.ok) throw new Error('Failed to fetch inquiries');
+          
           const data = await res.json();
-          set({ inquiries: data, isLoading: false });
+          
+          // Mock მონაცემების დაცვა
+          if (get().inquiries.length === 0) {
+             set({ inquiries: data, isLoading: false });
+          } else {
+             set({ isLoading: false });
+          }
         } catch (err) {
           console.error(err);
           set({ error: 'Failed to load inquiries', isLoading: false });
@@ -50,7 +64,6 @@ export const useInquiryStore = create<InquiryState>()(
             inq.id === id ? { ...inq, phase: newPhase, updatedAt: new Date().toISOString() } : inq
           )
         }));
-        // API Call
         try {
           await fetch(`/api/inquiries/${id}`, {
             method: 'PATCH',
@@ -82,7 +95,6 @@ export const useInquiryStore = create<InquiryState>()(
             inq.id === updatedInquiry.id ? updatedInquiry : inq
           )
         }));
-        // API Call
         try {
            await fetch(`/api/inquiries/${updatedInquiry.id}`, {
             method: 'PATCH',

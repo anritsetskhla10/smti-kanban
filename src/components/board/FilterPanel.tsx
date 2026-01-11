@@ -7,19 +7,24 @@ import { Search, X, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 export const FilterPanel = () => {
-  const { filters, setFilters } = useInquiryStore();
+  const { filters, setFilters, fetchInquiries } = useInquiryStore();
+  
   const [searchTerm, setSearchTerm] = useState(filters.searchQuery);
-  const debouncedSearch = useDebounce(searchTerm, 300);
+  const debouncedSearch = useDebounce(searchTerm, 500);
+  useEffect(() => {
+      setFilters({ searchQuery: debouncedSearch });
+      fetchInquiries(); 
+  }, [debouncedSearch, setFilters, fetchInquiries]);
 
-  useEffect(() => { setFilters({ searchQuery: debouncedSearch }); }, [debouncedSearch, setFilters]);
   useEffect(() => { setSearchTerm(filters.searchQuery); }, [filters.searchQuery]);
 
   const handleClear = () => {
     setSearchTerm('');
     setFilters({ searchQuery: '', minValue: 0, dateRange: { from: null, to: null } });
+    
+    setTimeout(() => fetchInquiries(), 0);
   };
 
-  // Count active filters
   const activeFilterCount = [
     filters.searchQuery,
     filters.minValue > 0,
@@ -47,7 +52,7 @@ export const FilterPanel = () => {
       {/* Separator */}
       <div className="h-8 w-px bg-gray-200 dark:bg-gray-700 hidden xl:block" />
 
-      {/*  Filters Group */}
+      {/* Filters Group */}
       <div className="flex flex-wrap items-center gap-8 w-full xl:w-auto">
         
         {/* Date Range */}
@@ -62,7 +67,10 @@ export const FilterPanel = () => {
                             : "text-gray-400"                    
                     }`}
                     value={filters.dateRange.from || ''}
-                    onChange={(e) => setFilters({ dateRange: { ...filters.dateRange, from: e.target.value || null } })}
+                    onChange={(e) => {
+                        setFilters({ dateRange: { ...filters.dateRange, from: e.target.value || null } });
+                        fetchInquiries();
+                    }}
                 />
                 <span className="text-gray-400">→</span>
                 <input 
@@ -73,13 +81,16 @@ export const FilterPanel = () => {
                             : "text-gray-400"
                     }`}
                     value={filters.dateRange.to || ''}
-                    onChange={(e) => setFilters({ dateRange: { ...filters.dateRange, to: e.target.value || null } })}
+                    onChange={(e) => {
+                        setFilters({ dateRange: { ...filters.dateRange, to: e.target.value || null } });
+                        fetchInquiries();
+                    }}
                 />
              </div>
         </div>
 
         {/* Separator */}
-              <div className="h-8 w-px bg-gray-200 dark:bg-gray-700 hidden xl:block" />
+        <div className="h-8 w-px bg-gray-200 dark:bg-gray-700 hidden xl:block" />
 
         {/* Min Value */}
         <div className="flex items-center gap-3 bg-transparent border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-2 h-[42px] min-w-[180px]">
@@ -96,6 +107,7 @@ export const FilterPanel = () => {
                         const val = e.target.value;
                         setFilters({ minValue: val ? Number(val) : 0 });
                     }}
+                    onBlur={() => fetchInquiries()}
                     className="w-full bg-transparent border-none text-sm font-bold text-gray-900 dark:text-white focus:ring-0 outline-none p-0 placeholder-gray-300"
                 />
             </div>

@@ -1,15 +1,23 @@
 import { NextResponse } from 'next/server';
 
-// PATCH 
+// PATCH /api/inquiries/:id
 export async function PATCH(
-  _request: Request, 
+  request: Request,
   { params }: { params: { id: string } }
 ) {
   await new Promise((resolve) => setTimeout(resolve, 500));
-  
-  return NextResponse.json({ 
-    success: true, 
-    id: params.id,
-    message: "Phase updated successfully" 
-  });
+
+  try {
+    const body = await request.json();
+    const { id } = params;
+
+    return NextResponse.json({
+      id,
+      ...body,
+      updatedAt: new Date().toISOString(),
+    });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: 'Failed to update' }, { status: 500 });
+  }
 }

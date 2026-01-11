@@ -6,6 +6,7 @@ import { InquiryPhase } from "@/types";
 import { DndContext } from "./DndContext";
 import { DropResult } from "@hello-pangea/dnd";
 import { Button } from "@/components/ui/Button";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 const COLUMNS: { id: InquiryPhase; title: string }[] = [
   { id: "new", title: "New Inquiry" },
@@ -30,7 +31,7 @@ export const KanbanBoard = ({ onCardClick }: KanbanBoardProps) => {
     updatePhase(draggableId, newPhase);
   };
 
- const filteredInquiries = inquiries.filter((inq) => {
+  const filteredInquiries = inquiries.filter((inq) => {
     const matchesSearch = inq.clientName.toLowerCase().includes(filters.searchQuery.toLowerCase());
     const matchesValue = inq.potentialValue >= filters.minValue;
     
@@ -51,9 +52,19 @@ export const KanbanBoard = ({ onCardClick }: KanbanBoardProps) => {
 
   if (isLoading) {
     return (
-       <div className="flex h-full gap-4 overflow-hidden px-layout pb-4">
+       <div className="flex h-full gap-4 overflow-hidden px-layout pb-4 items-start justify-start 2xl:justify-center">
          {[1, 2, 3, 4].map((i) => (
-           <div key={i} className="min-w-[300px] w-full md:w-[350px] bg-bg-card/50 rounded-main h-full animate-pulse border border-border" />
+           <div key={i} className="min-w-[300px] w-full md:w-[350px] flex flex-col gap-4 p-3 border border-gray-200 dark:border-gray-700 rounded-2xl h-full bg-gray-50/30 dark:bg-gray-800/10">
+              {/* Header Skeleton */}
+              <div className="flex justify-between items-center mb-2">
+                 <Skeleton className="h-5 w-32" /> 
+                 <Skeleton className="h-6 w-8 rounded-full" /> 
+              </div>
+              {/* Cards Skeletons  */}
+              <Skeleton className="h-32 w-full rounded-xl" />
+              <Skeleton className="h-32 w-full rounded-xl" />
+              <Skeleton className="h-24 w-full rounded-xl" />
+           </div>
          ))}
        </div>
     );
