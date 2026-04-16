@@ -1,0 +1,17 @@
+{
+  "id": "smti-kanban",
+  "title": "SMTI Inquiry Kanban",
+  "description": {
+    "en": "A production-grade Kanban board built for the SMTI ERP system to manage event inquiries across four pipeline stages. Features optimistic UI updates, URL-synchronized filters for shareable views, drag-and-drop reordering via @hello-pangea/dnd, and full CRUD via a mock API with simulated latency. Fully responsive with native dark mode.",
+    "ka": "საწარმოო დონის Kanban დაფა, შექმნილი SMTI ERP სისტემისთვის ღონისძიებათა მოთხოვნების მართვისთვის. მოიცავს ოპტიმისტურ UI განახლებებს, URL-სინქრონიზებულ ფილტრებს, drag-and-drop გადაადგილებას @hello-pangea/dnd-ის საშუალებით და სრულ CRUD ფუნქციონალს სიმულირებული API-ით. სრულად რესპონსიულია, dark mode-ის მხარდაჭერით."
+  },
+  "technologies": [
+    "Next.js",
+    "TypeScript",
+    "Zustand",
+    "Tailwind CSS",
+    "@hello-pangea/dnd"
+  ],
+  "imageCount": 4,
+  "link": "https://smti-kanban.vercel.app/"
+}
